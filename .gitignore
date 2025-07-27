@@ -1,0 +1,22 @@
+# Julia
+*.jl.*.cov
+*.jl.cov
+*.jl.mem
+/deps/deps.jl
+/docs/build/
+Manifest.toml
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+/build/
+/dist/ 
