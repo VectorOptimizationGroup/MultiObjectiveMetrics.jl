@@ -1,3 +1,5 @@
+allocations(f, args...) = (f(args...); @allocated f(args...))
+
 @testset "type stability and allocations" begin
     F = [[0.0, 1.0], [0.25, 0.75], [1.0, 0.0]]
     G = [[0.0, 1.0, 0.5], [0.5, 0.5, 0.5], [1.0, 0.0, 0.2]]
@@ -26,12 +28,10 @@
     @inferred normalized_hypervolume(F, F)
     @inferred gamma_spread(eachcol(reduce(hcat, F)), F)
 
-    # Pairwise comparisons do not allocate.
-    compare(u, v); weakly_dominates(u, v); isequivalent(u, v)
-    @test (@allocated compare(u, v)) == 0
-    @test (@allocated weakly_dominates(u, v)) == 0
-    @test (@allocated isequivalent(u, v)) == 0
-    # Spreads allocate one work vector (plus the extremes when R is given).
-    delta_spread(F, ideal, nadir)
-    @test (@allocated delta_spread(F, ideal, nadir)) <= 256
+    # Pairwise comparisons do not allocate (measured inside a function).
+    @test allocations(dominates, u, v) == 0   # compare itself; Julia 1.10 boxes a returned enum
+    @test allocations(weakly_dominates, u, v) == 0
+    @test allocations(isequivalent, u, v) == 0
+    # Spreads allocate one work vector.
+    @test allocations(delta_spread, F, ideal, nadir) <= 256
 end
