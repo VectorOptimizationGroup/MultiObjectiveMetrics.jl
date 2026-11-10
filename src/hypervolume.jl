@@ -83,7 +83,7 @@ function _hypervolume3d(points::AbstractVector{Vector{T}}, r::Vector{T}) where {
     area = zero(T)
     volume = zero(T)
     previous = points[order[1]][3]
-    @inbounds for k in order
+    for k in order
         p = points[k]
         px, py, pz = p[1], p[2], p[3]
         volume += area * (pz - previous)

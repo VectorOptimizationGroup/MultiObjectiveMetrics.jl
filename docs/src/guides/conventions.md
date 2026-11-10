@@ -19,8 +19,10 @@ literal reading of the source gives a defined value.
 | all points of `A` equal in objective `j` | Δ: **``Δ_j = 1``** | — | — | — | see below |
 
 Equivalence (`≈`) is the tolerance of [`Tolerance`](@ref). For Purity and
-Covering, equivalent points count once; for Γ and Δ the front is used as
-given, so repeated points lower the spread score, as clustering should.
+Covering, equivalent points count once, and Covering first reduces both sets
+to their non-dominated points (the source assumes non-dominated sets). For Γ
+and Δ the front is used as given, so repeated points lower the spread score,
+as clustering should.
 
 ## Points beyond the extremes (Γ and Δ)
 

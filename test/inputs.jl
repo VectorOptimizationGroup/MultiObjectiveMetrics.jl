@@ -17,6 +17,10 @@
     # Mixed: matrix columns against a vector of vectors.
     @test purity(eachcol(columns), points) == 1.0
 
+    # Abstract element types fall back to Float64.
+    @test purity(Vector{Real}[[0.0, 1], [1, 0.0]], points) === 1.0
+    @test hypervolume(Vector{Real}[[0.5, 0.5]], [1, 1]) === 0.25
+
     @testset "malformed sets" begin
         @test_throws DimensionMismatch nondominated([[1.0, 2.0], [1.0]])
         @test_throws ArgumentError nondominated([Float64[]])

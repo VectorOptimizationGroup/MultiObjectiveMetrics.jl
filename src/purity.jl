@@ -9,7 +9,8 @@ Purity of the front `A` of one solver with respect to the reference front `R`
 `R` is normally the non-dominated set of the union of the fronts of all
 solvers compared, `nondominated(reduce(vcat, fronts))`. A point of `A` belongs
 to `R` when it is equivalent to some point of `R` under `tol`. Equivalent
-points of `A` count once (see [`unique_points`](@ref)). The result lies in
+points of `A` count once (see [`unique_points`](@ref)); otherwise `A` is used
+as given, so pass the non-dominated front of the solver. The result lies in
 `[0, 1]`, higher is better; for performance profiles use `1 / purity`.
 
 Returns `NaN` when `A` is empty.

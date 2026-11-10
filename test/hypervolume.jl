@@ -19,6 +19,30 @@ function hv_inclusion_exclusion(F, r)
     return total
 end
 
+# Reference independent of the 3D sweep: slice along the last objective and
+# accumulate rectangles in 2D.
+function hv_slices_2d(P, r)
+    d = length(r)
+    P = [p for p in P if all(p .< r)]
+    if d == 2
+        Q = sort(P; by = p -> p[2])
+        vol = 0.0
+        xmin = r[1]
+        for p in Q
+            vol += max(xmin - p[1], 0.0) * (r[2] - p[2])
+            xmin = min(xmin, p[1])
+        end
+        return vol
+    end
+    S = sort(P; by = p -> p[d])
+    vol = 0.0
+    for k in eachindex(S)
+        top = k < length(S) ? S[k + 1][d] : r[d]
+        vol += (top - S[k][d]) * hv_slices_2d([q[1:(d - 1)] for q in S[1:k]], r[1:(d - 1)])
+    end
+    return vol
+end
+
 @testset "hypervolume" begin
     @testset "small cases by hand" begin
         @test hypervolume([[1.0, 2.0], [2.0, 1.0]], [3.0, 3.0]) == 3.0
@@ -57,15 +81,18 @@ end
         end
     end
 
-    @testset "3D sweep against slicing recursion" begin
+    @testset "sweep and slicing against slicing down to 2D" begin
         rng = MersenneTwister(42)
-        for _ in 1:20
-            F = [rand(rng, 3) for _ in 1:60]
-            r = [1.0, 1.0, 1.0]
-            # Lift to 4D with a constant objective: HV4 = HV3 · (r4 - c).
-            G = [vcat(p, 0.0) for p in F]
-            @test hypervolume(G, [1.0, 1.0, 1.0, 2.0]) ≈ 2 * hypervolume(F, r) rtol = 1e-12
+        for m in 3:5, _ in 1:12
+            n = rand(rng, 1:(m == 3 ? 150 : 40))
+            F = [round.(rand(rng, m); digits = 2) for _ in 1:n]   # many ties
+            r = fill(1.0, m)
+            @test hypervolume(F, r) ≈ hv_slices_2d(F, r) atol = 1e-12
         end
+        # Lift to 4D with a constant objective: HV4 = HV3 · (r4 - c).
+        F = [rand(rng, 3) for _ in 1:60]
+        G = [vcat(p, 0.0) for p in F]
+        @test hypervolume(G, [1.0, 1.0, 1.0, 2.0]) ≈ 2 * hypervolume(F, [1.0, 1.0, 1.0]) rtol = 1e-12
         # Points on a sphere (all non-dominated).
         F = [normalize3(rand(rng, 3)) for _ in 1:200]
         @test 0 < hypervolume(F, [1.1, 1.1, 1.1]) < 1.1^3

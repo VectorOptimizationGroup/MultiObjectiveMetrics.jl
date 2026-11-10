@@ -2,8 +2,11 @@
 
 const PointSet = AbstractVector{<:AbstractVector{<:Real}}
 
-# Floating-point type of the values of a point set.
-_floattype(F::PointSet) = float(eltype(eltype(F)))
+# Floating-point type of the values of a point set; Float64 when the element
+# type is abstract (for example `Vector{Vector{Real}}`).
+_floattype(F::PointSet) = _floattype(eltype(eltype(F)))
+_floattype(::Type{T}) where {T<:AbstractFloat} = T
+_floattype(::Type{T}) where {T<:Real} = isconcretetype(T) ? float(T) : Float64
 _floattype(F::PointSet, G::PointSet) = promote_type(_floattype(F), _floattype(G))
 
 # Checks that every point has `m` finite components; `m = 0` takes the
