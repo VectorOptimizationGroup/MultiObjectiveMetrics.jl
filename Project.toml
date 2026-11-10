@@ -1,16 +1,7 @@
-name = "MOMetrics"
-uuid = "ce69811c-acbd-5661-93d5-b8f2c3d7966a"
-authors = ["Souza-DR <danilogyn01@gmail.com>"]
+name = "MultiObjectiveMetrics"
+uuid = "fea2d4ab-0e01-4027-bb89-c155490fea37"
 version = "0.1.0"
-
-[deps]
-# Por enquanto não há dependências externas, mas você pode adicionar aqui conforme necessário
+authors = ["Danilo Rodrigues de Souza", "Leandro da Fonseca Prudente"]
 
 [compat]
-julia = "1.6"
-
-[extras]
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
-
-[targets]
-test = ["Test"] 
+julia = "1.10"
