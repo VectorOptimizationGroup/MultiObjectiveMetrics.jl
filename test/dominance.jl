@@ -16,7 +16,7 @@ end
     @test compare([1.0, 2.0], [1.0, 2.0]) == Equivalent
     @test compare([1, 2], [2, 3]) == Dominates
 
-    # FPS2025: ε_i = tol * max(1, |u_i|, |v_i|).
+    # Fazzio2025ActiveSet: ε_i = tol * max(1, |u_i|, |v_i|).
     tol = Tolerance(1e-3)
     @test compare([1.0, 2.0], [1.0005, 2.0]; tol) == Equivalent
     @test compare([1.0, 2.0], [1.002, 2.0]; tol) == Dominates

@@ -1,7 +1,7 @@
 @testset "gamma_spread and delta_spread" begin
     R = [[0.0, 1.0], [0.5, 0.5], [1.0, 0.0]]
 
-    @testset "formulas (CMVV2011 eq. 5.1-5.2)" begin
+    @testset "formulas (Custodio2011Direct eq. 5.1-5.2)" begin
         # Uniform front reaching both extremes.
         @test gamma_spread(R, R) == 0.5
         @test delta_spread(R, R) == 0.0

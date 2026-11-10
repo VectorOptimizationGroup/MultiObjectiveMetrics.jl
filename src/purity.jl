@@ -2,7 +2,7 @@
     purity(A, R; tol = Tolerance())
 
 Purity of the front `A` of one solver with respect to the reference front `R`
-[BPA2004](@cite), [CMVV2011](@cite):
+[Bandyopadhyay2004Multiobjective](@cite), [Custodio2011Direct](@cite):
 
     purity(A, R) = |A ∩ R| / |A|
 

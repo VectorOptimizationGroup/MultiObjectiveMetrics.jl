@@ -47,11 +47,11 @@ With a reference front `R`, `ideal = ideal_point(R)` and
 `nadir = nadir_point(R)`. The value lies in `[0, 1]`; higher is better, and for
 performance profiles use `1 / HV_norm`.
 
-This is the convention of [FPS2025](@cite) (Section 7.2), not a definition
+This is the convention of [Fazzio2025ActiveSet](@cite) (Section 7.2), not a definition
 from the hypervolume literature: normalizing by ideal and nadir and taking a
 reference point slightly worse than the nadir is common practice, but
 `offset = 1.1` and the division by `offset^m` are the authors' choices; see
-[IISN2018](@cite) for the effect of the reference point. Use
+[Ishibuchi2018How](@cite) for the effect of the reference point. Use
 [`hypervolume`](@ref) for any other reference point.
 
 Returns `NaN` when `F` is empty or when `ideal ≈ nadir` in every objective

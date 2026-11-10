@@ -18,7 +18,7 @@ tolerance `ε_i` of [`Tolerance`](@ref):
 - `Equivalent`: `|u_i - v_i| ≤ ε_i` for all `i`;
 - `Incomparable`: otherwise.
 
-This is the rule of [FPS2025](@cite); `Tolerance(0)` gives Pareto dominance.
+This is the rule of [Fazzio2025ActiveSet](@cite); `Tolerance(0)` gives Pareto dominance.
 
 # Examples
 
@@ -65,7 +65,7 @@ dominates(u::AbstractVector{<:Real}, v::AbstractVector{<:Real}; tol::Tolerance =
 
 Whether `u` weakly dominates `v`: `u_i ≤ v_i + ε_i` for every component, that
 is, `u` dominates `v` or is equivalent to it. This is the "covers" relation of
-[ZT1998](@cite) and [Zit1999](@cite) (Def. 4).
+[Zitzler1998Multiobjective](@cite) and [Zitzler1999Evolutionary](@cite) (Def. 4).
 
 # Examples
 

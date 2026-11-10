@@ -1,5 +1,5 @@
 @testset "purity" begin
-    # BPA2004 eq. (7)-(8): denominator is the solver's own front.
+    # Bandyopadhyay2004Multiobjective eq. (7)-(8): denominator is the solver's own front.
     A = [[0.0, 1.0], [0.6, 0.6], [1.0, 0.0]]
     B = [[0.5, 0.5], [0.0, 1.0], [2.0, -1.0]]
     R = nondominated(vcat(A, B))

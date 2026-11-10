@@ -1,14 +1,14 @@
 """
     covering(A, B; relation = WeakDominance(), tol = Tolerance())
 
-Covering (C-metric) of `B` by `A` [ZT1998](@cite), [Zit1999](@cite) (Def. 9):
+Covering (C-metric) of `B` by `A` [Zitzler1998Multiobjective](@cite), [Zitzler1999Evolutionary](@cite) (Def. 9):
 the fraction of the points of `B` covered by at least one point of `A`,
 
     C(A, B) = |{b ∈ B : ∃ a ∈ A, a ⪰ b}| / |B|.
 
 With the default [`WeakDominance`](@ref), `a ⪰ b` means that `a` dominates or
 equals `b`, as in the source. [`StrictDominance`](@ref) does not count equal
-points; it reproduces the covering of [FPS2025](@cite) and of
+points; it reproduces the covering of [Fazzio2025ActiveSet](@cite) and of
 Metaheuristics.jl. Before counting, both sets are reduced to their
 non-dominated points and equivalent points are counted once.
 

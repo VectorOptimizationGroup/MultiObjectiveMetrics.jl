@@ -2,21 +2,21 @@
     hypervolume(F, reference)
 
 Exact hypervolume of the point set `F` with respect to `reference`
-[ZT1998](@cite), [Zit1999](@cite): the Lebesgue measure of the region
+[Zitzler1998Multiobjective](@cite), [Zitzler1999Evolutionary](@cite): the Lebesgue measure of the region
 dominated by `F` and bounded by `reference`,
 
     HV(F; r) = λ_m(∪_{y ∈ F} [y, r]).
 
 Higher is better. The reference point is always explicit: there is no
-default, because the value depends strongly on it [IISN2018](@cite). Points
+default, because the value depends strongly on it [Ishibuchi2018How](@cite). Points
 that are not strictly better than `reference` in every objective contribute
 nothing; dominated and repeated points do not change the value. An empty set,
 or a set with no contributing point, has hypervolume zero.
 
 Algorithms: sorting for `m = 2`; the dimension sweep of Paquete et al.
-described in [FPL2006](@cite) (Section III-A) for `m = 3`, in
+described in [Fonseca2006Improved](@cite) (Section III-A) for `m = 3`, in
 `O(n²)` worst-case time with a sorted vector instead of a balanced tree; and
-the slicing recursion of [FPL2006](@cite) (Algorithm 1), down to the
+the slicing recursion of [Fonseca2006Improved](@cite) (Algorithm 1), down to the
 three-dimensional case, for `m ≥ 4`.
 
 See [`normalized_hypervolume`](@ref) for the normalized variant.
@@ -72,7 +72,7 @@ function _hypervolume2d(points::AbstractVector{Vector{T}}, r::Vector{T}) where {
     return volume
 end
 
-# Dimension sweep along objective 3 (FPL2006, Section III-A). The
+# Dimension sweep along objective 3 (Fonseca2006Improved, Section III-A). The
 # non-dominated projections on objectives 1-2 form a staircase stored by
 # increasing objective 1 (so decreasing objective 2); `area` is the area it
 # dominates up to (r[1], r[2]).
@@ -123,7 +123,7 @@ function _hypervolume3d(points::AbstractVector{Vector{T}}, r::Vector{T}) where {
     return volume + area * (r[3] - previous)
 end
 
-# Slicing along objective d (FPL2006, Algorithm 1): the slab between
+# Slicing along objective d (Fonseca2006Improved, Algorithm 1): the slab between
 # consecutive values of objective d has as base the (d-1)-dimensional
 # hypervolume of the points already swept.
 function _hypervolume_slices(points::AbstractVector{Vector{T}}, r::Vector{T}, d::Int) where {T}

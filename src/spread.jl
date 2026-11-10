@@ -2,7 +2,7 @@
     gamma_spread(A, R; tol = Tolerance())
     gamma_spread(A, ideal, nadir; tol = Tolerance())
 
-Γ-spread of the front `A` [CMVV2011](@cite) (eq. 5.1): the largest gap between
+Γ-spread of the front `A` [Custodio2011Direct](@cite) (eq. 5.1): the largest gap between
 consecutive values of any objective, with the extreme values `ideal[j]` and
 `nadir[j]` added at both ends,
 
@@ -42,8 +42,8 @@ gamma_spread(A::PointSet, ideal::AbstractVector{<:Real}, nadir::AbstractVector{<
     delta_spread(A, R; tol = Tolerance())
     delta_spread(A, ideal, nadir; tol = Tolerance())
 
-Δ-spread of the front `A` [CMVV2011](@cite) (eq. 5.2), the extension to `m`
-objectives of the Δ of [DPAM2002](@cite):
+Δ-spread of the front `A` [Custodio2011Direct](@cite) (eq. 5.2), the extension to `m`
+objectives of the Δ of [Deb2002Fast](@cite):
 
     Δ = max_j (δ_{0,j} + δ_{N,j} + Σ_{i=1}^{N-1} |δ_{i,j} - δ̄_j|) / (δ_{0,j} + δ_{N,j} + (N - 1) δ̄_j),
 

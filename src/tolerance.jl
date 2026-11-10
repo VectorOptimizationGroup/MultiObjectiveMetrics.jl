@@ -9,7 +9,7 @@ and `b`, the tolerance is
     ε = max(atol, rtol * max(|a|, |b|))
 
 `Tolerance(tol)` sets `atol = rtol = tol`, which gives
-`ε = tol * max(1, |a|, |b|)`, the rule of [FPS2025](@cite).
+`ε = tol * max(1, |a|, |b|)`, the rule of [Fazzio2025ActiveSet](@cite).
 `Tolerance()` uses `tol = √eps(Float64) ≈ 1.49e-8`, and `Tolerance(0)` compares
 exactly. Both values must be finite and nonnegative.
 

@@ -2,7 +2,7 @@
     A = [[0.0, 1.0], [1.0, 0.0]]
     B = [[0.0, 1.0], [2.0, 0.5]]
 
-    # Zit1999 Def. 9: weak dominance counts equal points.
+    # Zitzler1999Evolutionary Def. 9: weak dominance counts equal points.
     @test covering(A, B) == 1.0
     @test covering(A, B; relation = WeakDominance()) == 1.0
     # Strict dominance does not.
